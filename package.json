@@ -1,0 +1,24 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nuxi dev",
+    "build": "nuxi build",
+    "start": "node .output/server/index.mjs"
+  },
+  "devDependencies": {
+    "@pinia/nuxt": "^0.1.6",
+    "autoprefixer": "10.4.4",
+    "nuxt3": "3.0.0-27474800.8dd77d7",
+    "prettier": "^2.5.1",
+    "sass": "1.43.4",
+    "sass-loader": "12.6.0"
+  },
+  "dependencies": {
+    "@mdi/font": "^6.6.96",
+    "axios": "^0.26.1",
+    "highlight.js": "^11.3.1",
+    "pinia": "^2.0.8",
+    "vue-i18n": "^9.1.10",
+    "vuetify": "^3.0.0-beta.0"
+  }
+}
