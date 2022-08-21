@@ -73,13 +73,11 @@ export default defineNuxtPlugin(async ({ ssrContext }) => {
                 }
               }
             }
-            
             isGetRouteAuth = true;
             // 跳转
             to.name = "";
             to.matched = [];
             router.push({ ...to, replace: true });
-            
           }
         }
       });
