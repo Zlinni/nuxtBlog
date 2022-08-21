@@ -1,16 +1,19 @@
 <template>
-  <NuxtLayout name="home">
-    <template #drawer>
-      <slider></slider>
-    </template>
-    <template #appbar>
-      <appbar></appbar>
-    </template>
-    <NuxtChild></NuxtChild>
-  </NuxtLayout>
+  <div>
+    <NuxtLayout name="layouthome">
+      <!-- <error-msg></error-msg> -->
+      <template #drawer>
+        <slider></slider>
+      </template>
+      <template #appbar>
+        <appbar></appbar>
+      </template>
+      <NuxtChild />
+    </NuxtLayout>
+  </div>
 </template>
 <script>
-export default {
-  layout: "home",
-};
+definePageMeta({
+  keepalive: true,
+});
 </script>

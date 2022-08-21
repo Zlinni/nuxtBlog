@@ -1,0 +1,3 @@
+<template>
+    <particle></particle>
+</template>
