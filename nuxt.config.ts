@@ -1,5 +1,6 @@
 import { defineNuxtConfig } from "nuxt";
 export default defineNuxtConfig({
+  pages: true,
   css: ["vuetify/lib/styles/main.sass"],
   buildModules: [
     // pinia plugin - https://pinia.esm.dev
@@ -30,19 +31,19 @@ export default defineNuxtConfig({
     localeDir: "locales",
     vueI18n: {},
   },
-  hooks: {
-    "pages:extend": (pages) => {
-      // 404页面还是会保留的bug
-      pages = pages.filter(item=>item.name !== '404')
-      for (const page of pages) {
-        if (page.path === "/") {
-          const reg = /^[^management]/;
-          page.children = page.children.filter((item) => reg.test(item.path));
-        } 
-      }
-      // console.log(pages)
-    },
-  },
+  // hooks: {
+  //   "pages:extend": (pages) => {
+  //     // 404页面还是会保留的bug
+  //     pages = pages.filter(item=>item.name !== '404')
+  //     for (const page of pages) {
+  //       if (page.path === "/") {
+  //         const reg = /^[^management]/;
+  //         page.children = page.children.filter((item) => reg.test(item.path));
+  //       } 
+  //     }
+  //     // console.log(pages)
+  //   },
+  // },
   publicRuntimeConfig: {
     blogApi: process.env.BLOG_API || "nothing provided",
     cryptoSecret: process.env.CRYPTO_SECRET || "nothing provided",

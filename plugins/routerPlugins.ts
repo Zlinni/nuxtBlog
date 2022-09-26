@@ -17,31 +17,41 @@ export default defineNuxtPlugin(async ({ ssrContext }) => {
       "/home",
       "/test",
     ];
+    console.log(router.getRoutes())
+    debugger
     let isGetRouteAuth = false; //这个是用于判断动态路由是否已经被获取
     const token = useCookie("token").value;
     // 如果登陆了，就直接在beforeeach外面调用动态路由
     // vite的动态导入
-    let modules = import.meta.glob('../pages/**/*.vue')
-    if (token) {
-      
-      const pageData = await useAuthRoute();
-      let routes = [...router.options.routes];
-      for (const item of routes) {
-        if (item.path === "/") {
-          
-          for (const page of pageData.data.value) {
-            const { name, path } = page;
-            router.addRoute("index", {
-              name,
-              path,
-              component: modules[`../pages${page.component}.vue`],
-            });
-          }
-        }
-      }
-      console.log(router.getRoutes())
-    } else {
+    let modules = import.meta.glob('../routes/**/*.vue')
+    console.log(modules)
+    debugger
+    router.removeRoute('404');
+    console.log(router.getRoutes())
+    debugger;
+    // if (token) {
+    //   const pageData = await useAuthRoute();
+    //   let routes = [...router.options.routes];
+    //   for (const item of routes) {
+    //     if (item.path === "/") {
+    //       for (const page of pageData.data.value) {
+    //         const { name, path,component } = page;
+    //         console.log(component)
+    //         router.addRoute("index", {
+    //           name,
+    //           path,
+    //           component: modules[`../routes${component}.vue`],
+    //         });
+    //       }
+    //     }
+    //   }
+    //   console.log(router.getRoutes())
+    // } 
+    // else
+    //  {
       router.beforeEach(async (to, from, next) => {
+        debugger
+        console.log(to)
         if (to.path === "/") {
           next("/home");
         }
@@ -62,13 +72,12 @@ export default defineNuxtPlugin(async ({ ssrContext }) => {
             let routes = [...router.options.routes];
             for (const item of routes) {
               if (item.path === "/") {
-                
                 for (const page of pageData.data.value) {
-                  const { name, path } = page;
+                  const { name, path,component } = page;
                   router.addRoute("index", {
                     name,
                     path,
-                    component: modules[`../pages${page.component}.vue`],
+                    component: modules[`../routes${component}.vue`],
                   });
                 }
               }
@@ -77,11 +86,12 @@ export default defineNuxtPlugin(async ({ ssrContext }) => {
             // 跳转
             to.name = "";
             to.matched = [];
-            router.push({ ...to, replace: true });
+            next({ ...to, replace: true });
+            // next();
           }
         }
       });
-    }
+    // }
   }
 });
 // type inputs = {
